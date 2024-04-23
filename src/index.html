@@ -6,11 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Page title</title>
   <link rel="stylesheet" href="./sass/index.scss" />
-  <script type="module" src="./index.js"></script>
+
 </head>
 
 <body>
-  <h1>Example title</h1>
+  <div class="container">
+    <form class="search-form" id="search-form">
+      <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images...">
+      <button type="submit">Search</button>
+    </form>
+    <div class="photoes">
+      <!-- Photo cards will be dynamically added here -->
+    </div>
+    <button type="button" class="load-more" style="display: none;">Load more</button>
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="index.js" type="module"></script>
 
 </body>
 
