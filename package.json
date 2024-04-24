@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://BukshtunovichAN.github.io/BukshtunovichAN",
   "scripts": {
-    "start": "parcel src/*.html",
+    "start": "parcel -p4040 src/*.html",
     "build": "parcel build src/*.html --public-url /Img-search-task/"
   },
   "repository": {

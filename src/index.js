@@ -2,7 +2,7 @@ import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import PixabayApi from './js/pixabayApi';
-import InfiniteScroll from 'infinite-scroll'; // Import Infinite Scroll library
+import InfiniteScroll from 'infinite-scroll';
 
 const pixabayApi = new PixabayApi();
 
@@ -22,24 +22,29 @@ function initLightBox() {
     captionsData: 'alt',
     captionDelay: 250,
   });
+
   console.log(lightbox);
 }
 
 function renderPhotoCard(photo) {
-  const card = document.createElement('div');
-  card.classList.add('gallery');
+  const card = document.createElement('li');
+  card.classList.add('gallery', 'gallery__item');
+
+  const flexLi = document.createElement('div');
 
   const link = document.createElement('a');
   link.href = photo.largeImageURL;
-
+  link.classList.add('gallery__link');
+  flexLi.appendChild(link);
   const img = document.createElement('img');
   img.src = photo.webformatURL;
   img.alt = photo.tags;
   img.loading = 'lazy';
+  img.classList.add('gallery__image');
   link.appendChild(img);
 
   const info = document.createElement('div');
-  info.classList.add('info');
+  info.classList.add('info', 'gallery__item');
 
   const likes = document.createElement('p');
   likes.classList.add('info-item');
@@ -59,7 +64,7 @@ function renderPhotoCard(photo) {
 
   // Например, строка info.append(likes, views, comments, downloads); добавляет элементы likes, views, comments и downloads в конец блока информации info.
   info.append(likes, views, comments, downloads);
-  card.append(link, info);
+  card.append(flexLi, info);
 
   return card;
 }
@@ -123,44 +128,23 @@ async function handleSearchFormSubmit(event) {
   if (searchQuery) {
     await renderSearchResults(searchQuery);
     initLightBox();
-    // Initialize Infinite Scroll after rendering search results
     initializeInfiniteScroll();
   }
 }
 
-// async function handleLoadMoreButtonClick() {
-//   try {
-//     const data = await pixabayApi.loadMore();
-//     const photoCards = data.hits.map(renderPhotoCard);
-//     photoes.append(...photoCards);
-//     if (lightbox) {
-//       lightbox.refresh();
-//     } else {
-//       initLightBox();
-//     }
-//     if (data.totalHits <= photoes.children.length) {
-//       loadMoreBtn.style.display = 'none'; // Hide load more button if no more results
-//       Notiflix.Notify.info(
-//         "We're sorry, but you've reached the end of search results."
-//       );
-//     }
-//   } catch (error) {
-//     console.error('Error loading more results:', error);
-//   }
-// }
-
-async function loadMore() {
-  console.log('tim: this is load more execution');
+async function handleLoadMoreButtonClick() {
   try {
     const data = await pixabayApi.loadMore();
     const photoCards = data.hits.map(renderPhotoCard);
     photoes.append(...photoCards);
+
     if (lightbox) {
       lightbox.refresh();
     } else {
       initLightBox();
     }
     if (data.totalHits <= photoes.children.length) {
+      loadMoreBtn.style.display = 'none'; // Hide load more button if no more results
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
@@ -171,23 +155,15 @@ async function loadMore() {
 }
 
 function initializeInfiniteScroll() {
-  new InfiniteScroll('.photoes', {
+  let infScroll = new InfiniteScroll(photoes, {
     path: function () {
-      // Return null or empty string since we don't have a specific path
       return 'kek';
     },
-    responseType: 'json',
-    status: '.page-load-status',
+    loadOnScroll: false,
+    append: false,
   });
-
-  // Check if the last page has been reached based on scroll position
-  // When last page is reached, load more content
-  const infiniteScroll = InfiniteScroll.data('.photoes');
-  photoes.addEventListener('scroll', function () {
-    // if (infiniteScroll && infiniteScroll.pageIndex < infiniteScroll.pageCount) {
-    if (infiniteScroll.checkLastPage()) {
-      loadMore();
-    }
-    // }
+  infScroll.on('scrollThreshold', function () {
+    console.log('this is event on scroll');
+    handleLoadMoreButtonClick();
   });
 }

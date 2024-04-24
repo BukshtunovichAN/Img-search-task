@@ -1,0 +1,75 @@
+.photoes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    align-items: stretch;
+    margin-top: 30px;
+}
+
+.gallery_item {
+    text-align: center;
+}
+
+.gallery__image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    color: rgb(117, 117, 117);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+        background-color: #fff;
+
+}
+
+.info-item {
+    margin-right: 5px;
+}
+
+
+// .photoes {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+// }
+
+// .gallery_item {
+//     text-align: center;
+//     width: calc(33.33% - 20px);
+//     /* Вычисляем ширину каждого элемента (1/3 от ширины контейнера с отступами) */
+//     margin-bottom: 20px;
+//     /* Добавляем отступ снизу для создания промежутков между рядами */
+// }
+
+// .gallery__image {
+//     max-width: 100%;
+//     object-fit: contain;
+//     height: auto;
+// }
+
+// .info {
+//     background-color: rgba(0, 0, 0, 0.5);
+//     color: white;
+//     padding: 10px;
+//     position: relative;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+
+//     border-radius: 10px;
+// }
+

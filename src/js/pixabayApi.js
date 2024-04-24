@@ -1,9 +1,9 @@
 import Notiflix from 'notiflix';
-import axios from 'axios'; // Импортируем axios
+import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '42494029-89ffd91f8b64ac9b988c0500e';
-const PER_PAGE = 40; // Number of results per page
+const PER_PAGE = 30; // Number of results per page
 
 export default class PixabayApi {
   constructor() {
@@ -48,21 +48,5 @@ export default class PixabayApi {
   async loadMore() {
     this.page++; // Increment page for pagination
     return this.fetchArticles();
-  }
-
-  getNextPageUrl() {
-    console.log('tim: this is getNextPageUrl execution');
-    // Construct the URL for the next page based on the current page number
-    const searchParams = new URLSearchParams({
-      key: API_KEY,
-      q: this.searchQuery,
-      image_type: 'photo',
-      orientation: 'horizontal',
-      safesearch: true,
-      page: this.page + 1, // Increment page for the next page
-      per_page: PER_PAGE,
-    });
-
-    return `${BASE_URL}?${searchParams}`;
   }
 }

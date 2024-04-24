@@ -1,11 +1,41 @@
 .search-form {
-    background-color: blue;
+background-color: rgb(47, 48, 58);
 
     padding: 10 0 10 0;
 
     text-align: center;
 }
 
-.info {
-    outline: red solid 2px;
+input {
+    width: 358px;
+    height: 50px;
+padding-left: 4px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 3%;
+    text-align: left;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    background-color: rgba(33, 150, 243, 0);
+}
+
+button {
+/* bg */
+    width: 200px;
+    height: 50px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    background: rgb(33, 150, 243);
+    color: rgb(255, 255, 255);
+    font-family: 'Roboto', sans-serif;    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 6%;
+    text-align: center;
 }
