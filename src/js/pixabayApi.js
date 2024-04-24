@@ -3,7 +3,7 @@ import axios from 'axios'; // Импортируем axios
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '42494029-89ffd91f8b64ac9b988c0500e';
-const PER_PAGE = 40; // Number of results per page
+const PER_PAGE = 5; // Number of results per page
 
 export default class PixabayApi {
   constructor() {

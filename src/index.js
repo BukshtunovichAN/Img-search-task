@@ -128,29 +128,7 @@ async function handleSearchFormSubmit(event) {
   }
 }
 
-// async function handleLoadMoreButtonClick() {
-//   try {
-//     const data = await pixabayApi.loadMore();
-//     const photoCards = data.hits.map(renderPhotoCard);
-//     photoes.append(...photoCards);
-//     if (lightbox) {
-//       lightbox.refresh();
-//     } else {
-//       initLightBox();
-//     }
-//     if (data.totalHits <= photoes.children.length) {
-//       loadMoreBtn.style.display = 'none'; // Hide load more button if no more results
-//       Notiflix.Notify.info(
-//         "We're sorry, but you've reached the end of search results."
-//       );
-//     }
-//   } catch (error) {
-//     console.error('Error loading more results:', error);
-//   }
-// }
-
-async function loadMore() {
-  console.log('tim: this is load more execution');
+async function handleLoadMore() {
   try {
     const data = await pixabayApi.loadMore();
     const photoCards = data.hits.map(renderPhotoCard);
@@ -161,6 +139,7 @@ async function loadMore() {
       initLightBox();
     }
     if (data.totalHits <= photoes.children.length) {
+      loadMoreBtn.style.display = 'none'; // Hide load more button if no more results
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
@@ -170,24 +149,18 @@ async function loadMore() {
   }
 }
 
+
 function initializeInfiniteScroll() {
-  new InfiniteScroll('.photoes', {
-    path: function () {
-      // Return null or empty string since we don't have a specific path
-      return 'kek';
-    },
-    responseType: 'json',
-    status: '.page-load-status',
+  let infScroll = new InfiniteScroll('.photoes', {
+    path: function () { return 'page'; },
+    loadOnScroll: false,
+    scrollThreshold: 100,
+    // status: '.page-load-status',
   });
 
-  // Check if the last page has been reached based on scroll position
-  // When last page is reached, load more content
-  const infiniteScroll = InfiniteScroll.data('.photoes');
-  photoes.addEventListener('scroll', function () {
-    // if (infiniteScroll && infiniteScroll.pageIndex < infiniteScroll.pageCount) {
-    if (infiniteScroll.checkLastPage()) {
-      loadMore();
-    }
-    // }
+  infScroll.on( 'scrollThreshold', function() {
+    console.log('tim: scroll treshhold event')
+    handleLoadMore();
   });
+
 }
