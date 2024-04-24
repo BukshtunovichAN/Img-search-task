@@ -28,14 +28,16 @@ function initLightBox() {
 
 function renderPhotoCard(photo) {
   const card = document.createElement('li');
-  card.classList.add('gallery', 'gallery__item');
+  card.classList.add('gallery');
 
   const flexLi = document.createElement('div');
+  flexLi.classList.add('thumb');
 
   const link = document.createElement('a');
   link.href = photo.largeImageURL;
   link.classList.add('gallery__link');
   flexLi.appendChild(link);
+
   const img = document.createElement('img');
   img.src = photo.webformatURL;
   img.alt = photo.tags;
@@ -44,7 +46,7 @@ function renderPhotoCard(photo) {
   link.appendChild(img);
 
   const info = document.createElement('div');
-  info.classList.add('info', 'gallery__item');
+  info.classList.add('info');
 
   const likes = document.createElement('p');
   likes.classList.add('info-item');
