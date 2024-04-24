@@ -50,19 +50,4 @@ export default class PixabayApi {
     return this.fetchArticles();
   }
 
-  getNextPageUrl() {
-    console.log('tim: this is getNextPageUrl execution');
-    // Construct the URL for the next page based on the current page number
-    const searchParams = new URLSearchParams({
-      key: API_KEY,
-      q: this.searchQuery,
-      image_type: 'photo',
-      orientation: 'horizontal',
-      safesearch: true,
-      page: this.page + 1, // Increment page for the next page
-      per_page: PER_PAGE,
-    });
-
-    return `${BASE_URL}?${searchParams}`;
-  }
 }
